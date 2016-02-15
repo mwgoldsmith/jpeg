@@ -225,7 +225,7 @@ SETLOCAL EnableDelayedExpansion EnableExtensions
 MKDIR "$(OutDir)..\..\include"
 MKDIR "$(OutDir)..\..\include\$(ProjectName)"
 
-COPY "$(ProjectDir)jconfig.h "$(OutDir)..\..\include\$(ProjectName)"
+COPY "$(ProjectDir)jconfig.h" "$(OutDir)..\..\include\$(ProjectName)"
 
 FOR %%H IN (jmorecfg.h jpeglib.h) DO (
   SET "_HEADER=%%H"
@@ -284,7 +284,7 @@ SETLOCAL EnableDelayedExpansion EnableExtensions
 MKDIR "$(OutDir)..\..\include"
 MKDIR "$(OutDir)..\..\include\$(ProjectName)"
 
-COPY "$(ProjectDir)jconfig.h "$(OutDir)..\..\include\$(ProjectName)"
+COPY "$(ProjectDir)jconfig.h" "$(OutDir)..\..\include\$(ProjectName)"
 
 FOR %%H IN (jmorecfg.h jpeglib.h) DO (
   SET "_HEADER=%%H"
@@ -346,7 +346,7 @@ SETLOCAL EnableDelayedExpansion EnableExtensions
 MKDIR "$(OutDir)..\..\include"
 MKDIR "$(OutDir)..\..\include\$(ProjectName)"
 
-COPY "$(ProjectDir)jconfig.h "$(OutDir)..\..\include\$(ProjectName)"
+COPY "$(ProjectDir)jconfig.h" "$(OutDir)..\..\include\$(ProjectName)"
 
 FOR %%H IN (jmorecfg.h jpeglib.h) DO (
   SET "_HEADER=%%H"
@@ -407,7 +407,7 @@ SETLOCAL EnableDelayedExpansion EnableExtensions
 MKDIR "$(OutDir)..\..\include"
 MKDIR "$(OutDir)..\..\include\$(ProjectName)"
 
-COPY "$(ProjectDir)jconfig.h "$(OutDir)..\..\include\$(ProjectName)"
+COPY "$(ProjectDir)jconfig.h" "$(OutDir)..\..\include\$(ProjectName)"
 
 FOR %%H IN (jmorecfg.h jpeglib.h) DO (
   SET "_HEADER=%%H"
@@ -471,7 +471,7 @@ SETLOCAL EnableDelayedExpansion EnableExtensions
 MKDIR "$(OutDir)..\..\include"
 MKDIR "$(OutDir)..\..\include\$(ProjectName)"
 
-COPY "$(ProjectDir)jconfig.h "$(OutDir)..\..\include\$(ProjectName)"
+COPY "$(ProjectDir)jconfig.h" "$(OutDir)..\..\include\$(ProjectName)"
 
 FOR %%H IN (jmorecfg.h jpeglib.h) DO (
   SET "_HEADER=%%H"
@@ -534,7 +534,7 @@ SETLOCAL EnableDelayedExpansion EnableExtensions
 MKDIR "$(OutDir)..\..\include"
 MKDIR "$(OutDir)..\..\include\$(ProjectName)"
 
-COPY "$(ProjectDir)jconfig.h "$(OutDir)..\..\include\$(ProjectName)"
+COPY "$(ProjectDir)jconfig.h" "$(OutDir)..\..\include\$(ProjectName)"
 
 FOR %%H IN (jmorecfg.h jpeglib.h) DO (
   SET "_HEADER=%%H"
@@ -602,7 +602,7 @@ SETLOCAL EnableDelayedExpansion EnableExtensions
 MKDIR "$(OutDir)..\..\include"
 MKDIR "$(OutDir)..\..\include\$(ProjectName)"
 
-COPY "$(ProjectDir)jconfig.h "$(OutDir)..\..\include\$(ProjectName)"
+COPY "$(ProjectDir)jconfig.h" "$(OutDir)..\..\include\$(ProjectName)"
 
 FOR %%H IN (jmorecfg.h jpeglib.h) DO (
   SET "_HEADER=%%H"
@@ -669,7 +669,7 @@ SETLOCAL EnableDelayedExpansion EnableExtensions
 MKDIR "$(OutDir)..\..\include"
 MKDIR "$(OutDir)..\..\include\$(ProjectName)"
 
-COPY "$(ProjectDir)jconfig.h "$(OutDir)..\..\include\$(ProjectName)"
+COPY "$(ProjectDir)jconfig.h" "$(OutDir)..\..\include\$(ProjectName)"
 
 FOR %%H IN (jmorecfg.h jpeglib.h) DO (
   SET "_HEADER=%%H"
