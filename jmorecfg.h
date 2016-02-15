@@ -173,6 +173,11 @@ typedef char JOCTET;
 
 #endif /* HAVE_UNSIGNED_CHAR */
 
+#ifdef _WIN64
+#define LONG long long
+#else
+#define LONG long
+#endif
 
 /* These typedefs are used for various table entries and so forth.
  * They must be at least as wide as specified; but making them too big
@@ -245,8 +250,15 @@ typedef unsigned int JDIMENSION;
 /* a function referenced thru EXTERNs: */
 #define GLOBAL(type)		type
 /* a reference to a GLOBAL function: */
-#define EXTERN(type)		extern type
-
+#ifdef JPEG_EXPORTS
+#  if defined(_USRDLL) || !defined(_LIB)
+#    define EXTERN(type) __declspec(dllexport) type
+#  else
+#    define EXTERN(type) __declspec(dllimport) type
+#  endif
+#else
+#  define EXTERN(type)		extern type
+#endif
 
 /* This macro is used to declare a "method", that is, a function pointer.
  * We want to supply prototype parameters if the compiler can cope.
@@ -412,7 +424,11 @@ typedef enum { FALSE = 0, TRUE = 1 } boolean;
 #define INLINE __inline__
 #endif
 #ifndef INLINE
-#define INLINE			/* default is to define it as empty */
+#  if defined(_MSC_VER) && _MSC_VER > 710 /* I think introduced in VS .NET 2003 */
+#    define INLINE __inline
+#  else
+#    define INLINE			/* default is to define it as empty */
+#  endif
 #endif
 #endif
 
