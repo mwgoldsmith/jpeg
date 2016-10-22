@@ -186,7 +186,7 @@
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)..\..;$(OutDir)..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <ProgramDataBaseFileName>$(OutDir)..\..\lib\$(PlatformTarget)\$(TargetName).pdb</ProgramDataBaseFileName>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
       <PreprocessorDefinitions>_WINDOWS;WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BrowseInformationFile>$(IntDir)bsc\</BrowseInformationFile>
       <BrowseInformation>true</BrowseInformation>
@@ -202,8 +202,8 @@
       <PreserveSbr>true</PreserveSbr>
     </Bscmake>
     <PreBuildEvent>
-      <Command>
-ECHO ON
+      <Command>ECHO ON
+
 SETLOCAL EnableDelayedExpansion EnableExtensions
 
 IF EXIST "$(OutDir)..\..\licenses\$(ProjectName).txt" (
@@ -214,16 +214,19 @@ IF EXIST "$(OutDir)..\..\include\$(ProjectName)" (
   RD /q /s "$(OutDir)..\..\include\$(ProjectName)"
 )
 
-ENDLOCAL
-      </Command>
+ENDLOCAL</Command>
     </PreBuildEvent>
     <PostBuildEvent>
-      <Command>
-ECHO Off
+      <Command>ECHO Off
 SETLOCAL EnableDelayedExpansion EnableExtensions
 
-MKDIR "$(OutDir)..\..\include"
-MKDIR "$(OutDir)..\..\include\$(ProjectName)"
+IF NOT EXIST "$(OutDir)..\..\include" (
+  MKDIR "$(OutDir)..\..\include"
+)
+
+IF NOT EXIST "$(OutDir)..\..\include\$(ProjectName)" (
+  MKDIR "$(OutDir)..\..\include\$(ProjectName)"
+)
 
 COPY "$(ProjectDir)jconfig.h" "$(OutDir)..\..\include\$(ProjectName)"
 
@@ -232,11 +235,14 @@ FOR %%H IN (jmorecfg.h jpeglib.h) DO (
   COPY "$(ProjectDir)..\..\!_HEADER!" "$(OutDir)..\..\include\$(ProjectName)"
 )
 
-MKDIR "$(OutDir)..\..\licenses"
+IF NOT EXIST "$(OutDir)..\..\licenses" (
+  MKDIR "$(OutDir)..\..\licenses"
+)
+
 COPY "$(ProjectDir)..\..\README" "$(OutDir)..\..\licenses\$(ProjectName).txt" 
 
 ENDLOCAL
-      </Command>
+</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -247,7 +253,7 @@ ENDLOCAL
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <PreprocessorDefinitions>_WINDOWS;WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)..\..;$(OutDir)..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <ProgramDataBaseFileName>$(OutDir)..\..\lib\$(PlatformTarget)\$(TargetName).pdb</ProgramDataBaseFileName>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
       <BrowseInformationFile>$(IntDir)bsc\</BrowseInformationFile>
       <BrowseInformation>true</BrowseInformation>
     </ClCompile>
@@ -261,8 +267,8 @@ ENDLOCAL
       <PreserveSbr>true</PreserveSbr>
     </Bscmake>
     <PreBuildEvent>
-      <Command>
-ECHO ON
+      <Command>ECHO ON
+
 SETLOCAL EnableDelayedExpansion EnableExtensions
 
 IF EXIST "$(OutDir)..\..\licenses\$(ProjectName).txt" (
@@ -273,16 +279,19 @@ IF EXIST "$(OutDir)..\..\include\$(ProjectName)" (
   RD /q /s "$(OutDir)..\..\include\$(ProjectName)"
 )
 
-ENDLOCAL
-      </Command>
+ENDLOCAL</Command>
     </PreBuildEvent>
     <PostBuildEvent>
-      <Command>
-ECHO Off
+      <Command>ECHO Off
 SETLOCAL EnableDelayedExpansion EnableExtensions
 
-MKDIR "$(OutDir)..\..\include"
-MKDIR "$(OutDir)..\..\include\$(ProjectName)"
+IF NOT EXIST "$(OutDir)..\..\include" (
+  MKDIR "$(OutDir)..\..\include"
+)
+
+IF NOT EXIST "$(OutDir)..\..\include\$(ProjectName)" (
+  MKDIR "$(OutDir)..\..\include\$(ProjectName)"
+)
 
 COPY "$(ProjectDir)jconfig.h" "$(OutDir)..\..\include\$(ProjectName)"
 
@@ -291,11 +300,14 @@ FOR %%H IN (jmorecfg.h jpeglib.h) DO (
   COPY "$(ProjectDir)..\..\!_HEADER!" "$(OutDir)..\..\include\$(ProjectName)"
 )
 
-MKDIR "$(OutDir)..\..\licenses"
+IF NOT EXIST "$(OutDir)..\..\licenses" (
+  MKDIR "$(OutDir)..\..\licenses"
+)
+
 COPY "$(ProjectDir)..\..\README" "$(OutDir)..\..\licenses\$(ProjectName).txt" 
 
 ENDLOCAL
-      </Command>
+</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -307,7 +319,7 @@ ENDLOCAL
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)..\..;$(OutDir)..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <ProgramDataBaseFileName>$(OutDir)..\..\lib\$(PlatformTarget)\$(TargetName).pdb</ProgramDataBaseFileName>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
       <PreprocessorDefinitions>_WINDOWS;WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BrowseInformationFile>$(IntDir)bsc\</BrowseInformationFile>
       <BrowseInformation>true</BrowseInformation>
@@ -323,8 +335,8 @@ ENDLOCAL
       <PreserveSbr>true</PreserveSbr>
     </Bscmake>
     <PreBuildEvent>
-      <Command>
-ECHO ON
+      <Command>ECHO ON
+
 SETLOCAL EnableDelayedExpansion EnableExtensions
 
 IF EXIST "$(OutDir)..\..\licenses\$(ProjectName).txt" (
@@ -335,16 +347,19 @@ IF EXIST "$(OutDir)..\..\include\$(ProjectName)" (
   RD /q /s "$(OutDir)..\..\include\$(ProjectName)"
 )
 
-ENDLOCAL
-      </Command>
+ENDLOCAL</Command>
     </PreBuildEvent>
     <PostBuildEvent>
-      <Command>
-ECHO Off
+      <Command>ECHO Off
 SETLOCAL EnableDelayedExpansion EnableExtensions
 
-MKDIR "$(OutDir)..\..\include"
-MKDIR "$(OutDir)..\..\include\$(ProjectName)"
+IF NOT EXIST "$(OutDir)..\..\include" (
+  MKDIR "$(OutDir)..\..\include"
+)
+
+IF NOT EXIST "$(OutDir)..\..\include\$(ProjectName)" (
+  MKDIR "$(OutDir)..\..\include\$(ProjectName)"
+)
 
 COPY "$(ProjectDir)jconfig.h" "$(OutDir)..\..\include\$(ProjectName)"
 
@@ -353,11 +368,14 @@ FOR %%H IN (jmorecfg.h jpeglib.h) DO (
   COPY "$(ProjectDir)..\..\!_HEADER!" "$(OutDir)..\..\include\$(ProjectName)"
 )
 
-MKDIR "$(OutDir)..\..\licenses"
+IF NOT EXIST "$(OutDir)..\..\licenses" (
+  MKDIR "$(OutDir)..\..\licenses"
+)
+
 COPY "$(ProjectDir)..\..\README" "$(OutDir)..\..\licenses\$(ProjectName).txt" 
 
 ENDLOCAL
-      </Command>
+</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -369,7 +387,7 @@ ENDLOCAL
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)..\..;$(OutDir)..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <ProgramDataBaseFileName>$(OutDir)..\..\lib\$(PlatformTarget)\$(TargetName).pdb</ProgramDataBaseFileName>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
       <PreprocessorDefinitions>_WINDOWS;WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BrowseInformationFile>$(IntDir)bsc\</BrowseInformationFile>
       <BrowseInformation>true</BrowseInformation>
@@ -384,8 +402,8 @@ ENDLOCAL
       <PreserveSbr>true</PreserveSbr>
     </Bscmake>
     <PreBuildEvent>
-      <Command>
-ECHO ON
+      <Command>ECHO ON
+
 SETLOCAL EnableDelayedExpansion EnableExtensions
 
 IF EXIST "$(OutDir)..\..\licenses\$(ProjectName).txt" (
@@ -396,16 +414,19 @@ IF EXIST "$(OutDir)..\..\include\$(ProjectName)" (
   RD /q /s "$(OutDir)..\..\include\$(ProjectName)"
 )
 
-ENDLOCAL
-      </Command>
+ENDLOCAL</Command>
     </PreBuildEvent>
     <PostBuildEvent>
-      <Command>
-ECHO Off
+      <Command>ECHO Off
 SETLOCAL EnableDelayedExpansion EnableExtensions
 
-MKDIR "$(OutDir)..\..\include"
-MKDIR "$(OutDir)..\..\include\$(ProjectName)"
+IF NOT EXIST "$(OutDir)..\..\include" (
+  MKDIR "$(OutDir)..\..\include"
+)
+
+IF NOT EXIST "$(OutDir)..\..\include\$(ProjectName)" (
+  MKDIR "$(OutDir)..\..\include\$(ProjectName)"
+)
 
 COPY "$(ProjectDir)jconfig.h" "$(OutDir)..\..\include\$(ProjectName)"
 
@@ -414,11 +435,14 @@ FOR %%H IN (jmorecfg.h jpeglib.h) DO (
   COPY "$(ProjectDir)..\..\!_HEADER!" "$(OutDir)..\..\include\$(ProjectName)"
 )
 
-MKDIR "$(OutDir)..\..\licenses"
+IF NOT EXIST "$(OutDir)..\..\licenses" (
+  MKDIR "$(OutDir)..\..\licenses"
+)
+
 COPY "$(ProjectDir)..\..\README" "$(OutDir)..\..\licenses\$(ProjectName).txt" 
 
 ENDLOCAL
-      </Command>
+</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DebugDLL|Win32'">
@@ -428,18 +452,18 @@ ENDLOCAL
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)..\..;$(OutDir)..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <ProgramDataBaseFileName>$(IntDir)$(TargetName).pdb</ProgramDataBaseFileName>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
       <PreprocessorDefinitions>JPEG_EXPORTS;_DEBUG;_WINDOWS;_USRDLL;WIN32;DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BrowseInformationFile>$(IntDir)bsc\</BrowseInformationFile>
       <BrowseInformation>true</BrowseInformation>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
-      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
       <ImportLibrary>$(OutDir)..\..\lib\$(PlatformTarget)\$(TargetName).lib</ImportLibrary>
       <ProfileGuidedDatabase>$(IntDir)$(TargetName).pgd</ProfileGuidedDatabase>
-      <ProgramDatabaseFile>$(OutDir)..\..\lib\$(PlatformTarget)\$(TargetName).pdb</ProgramDatabaseFile>
+      <ProgramDatabaseFile>$(OutDir)..\..\bin\$(PlatformTarget)\$(TargetName).pdb</ProgramDatabaseFile>
       <AdditionalLibraryDirectories>$(OutDir)..\..\lib\$(PlatformTarget)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LargeAddressAware>true</LargeAddressAware>
@@ -448,8 +472,8 @@ ENDLOCAL
       <PreserveSbr>true</PreserveSbr>
     </Bscmake>
     <PreBuildEvent>
-      <Command>
-ECHO ON
+      <Command>ECHO ON
+
 SETLOCAL EnableDelayedExpansion EnableExtensions
 
 IF EXIST "$(OutDir)..\..\licenses\$(ProjectName).txt" (
@@ -460,16 +484,19 @@ IF EXIST "$(OutDir)..\..\include\$(ProjectName)" (
   RD /q /s "$(OutDir)..\..\include\$(ProjectName)"
 )
 
-ENDLOCAL
-      </Command>
+ENDLOCAL</Command>
     </PreBuildEvent>
     <PostBuildEvent>
-      <Command>
-ECHO Off
+      <Command>ECHO Off
 SETLOCAL EnableDelayedExpansion EnableExtensions
 
-MKDIR "$(OutDir)..\..\include"
-MKDIR "$(OutDir)..\..\include\$(ProjectName)"
+IF NOT EXIST "$(OutDir)..\..\include" (
+  MKDIR "$(OutDir)..\..\include"
+)
+
+IF NOT EXIST "$(OutDir)..\..\include\$(ProjectName)" (
+  MKDIR "$(OutDir)..\..\include\$(ProjectName)"
+)
 
 COPY "$(ProjectDir)jconfig.h" "$(OutDir)..\..\include\$(ProjectName)"
 
@@ -478,11 +505,14 @@ FOR %%H IN (jmorecfg.h jpeglib.h) DO (
   COPY "$(ProjectDir)..\..\!_HEADER!" "$(OutDir)..\..\include\$(ProjectName)"
 )
 
-MKDIR "$(OutDir)..\..\licenses"
+IF NOT EXIST "$(OutDir)..\..\licenses" (
+  MKDIR "$(OutDir)..\..\licenses"
+)
+
 COPY "$(ProjectDir)..\..\README" "$(OutDir)..\..\licenses\$(ProjectName).txt" 
 
 ENDLOCAL
-      </Command>
+</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DebugDLL|x64'">
@@ -492,18 +522,18 @@ ENDLOCAL
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)..\..;$(OutDir)..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <ProgramDataBaseFileName>$(IntDir)$(TargetName).pdb</ProgramDataBaseFileName>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
       <PreprocessorDefinitions>JPEG_EXPORTS;_DEBUG;_WINDOWS;_USRDLL;WIN32;DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BrowseInformationFile>$(IntDir)bsc\</BrowseInformationFile>
       <BrowseInformation>true</BrowseInformation>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
-      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
       <ImportLibrary>$(OutDir)..\..\lib\$(PlatformTarget)\$(TargetName).lib</ImportLibrary>
       <ProfileGuidedDatabase>$(IntDir)$(TargetName).pgd</ProfileGuidedDatabase>
-      <ProgramDatabaseFile>$(OutDir)..\..\lib\$(PlatformTarget)\$(TargetName).pdb</ProgramDatabaseFile>
+      <ProgramDatabaseFile>$(OutDir)..\..\bin\$(PlatformTarget)\$(TargetName).pdb</ProgramDatabaseFile>
       <AdditionalLibraryDirectories>$(OutDir)..\..\lib\$(PlatformTarget)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
@@ -511,8 +541,8 @@ ENDLOCAL
       <PreserveSbr>true</PreserveSbr>
     </Bscmake>
     <PreBuildEvent>
-      <Command>
-ECHO ON
+      <Command>ECHO ON
+
 SETLOCAL EnableDelayedExpansion EnableExtensions
 
 IF EXIST "$(OutDir)..\..\licenses\$(ProjectName).txt" (
@@ -523,16 +553,19 @@ IF EXIST "$(OutDir)..\..\include\$(ProjectName)" (
   RD /q /s "$(OutDir)..\..\include\$(ProjectName)"
 )
 
-ENDLOCAL
-      </Command>
+ENDLOCAL</Command>
     </PreBuildEvent>
     <PostBuildEvent>
-      <Command>
-ECHO Off
+      <Command>ECHO Off
 SETLOCAL EnableDelayedExpansion EnableExtensions
 
-MKDIR "$(OutDir)..\..\include"
-MKDIR "$(OutDir)..\..\include\$(ProjectName)"
+IF NOT EXIST "$(OutDir)..\..\include" (
+  MKDIR "$(OutDir)..\..\include"
+)
+
+IF NOT EXIST "$(OutDir)..\..\include\$(ProjectName)" (
+  MKDIR "$(OutDir)..\..\include\$(ProjectName)"
+)
 
 COPY "$(ProjectDir)jconfig.h" "$(OutDir)..\..\include\$(ProjectName)"
 
@@ -541,11 +574,14 @@ FOR %%H IN (jmorecfg.h jpeglib.h) DO (
   COPY "$(ProjectDir)..\..\!_HEADER!" "$(OutDir)..\..\include\$(ProjectName)"
 )
 
-MKDIR "$(OutDir)..\..\licenses"
+IF NOT EXIST "$(OutDir)..\..\licenses" (
+  MKDIR "$(OutDir)..\..\licenses"
+)
+
 COPY "$(ProjectDir)..\..\README" "$(OutDir)..\..\licenses\$(ProjectName).txt" 
 
 ENDLOCAL
-      </Command>
+</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseDLL|Win32'">
@@ -557,7 +593,7 @@ ENDLOCAL
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)..\..;$(OutDir)..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <ProgramDataBaseFileName>$(IntDir)$(TargetName).pdb</ProgramDataBaseFileName>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
       <PreprocessorDefinitions>JPEG_EXPORTS;WIN32;NDEBUG;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BrowseInformationFile>$(IntDir)bsc\</BrowseInformationFile>
       <BrowseInformation>true</BrowseInformation>
@@ -568,7 +604,7 @@ ENDLOCAL
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
       <ImportLibrary>$(OutDir)..\..\lib\$(PlatformTarget)\$(TargetName).lib</ImportLibrary>
       <ProfileGuidedDatabase>$(IntDir)$(TargetName).pgd</ProfileGuidedDatabase>
-      <ProgramDatabaseFile>$(OutDir)..\..\lib\$(PlatformTarget)\$(TargetName).pdb</ProgramDatabaseFile>
+      <ProgramDatabaseFile>$(OutDir)..\..\bin\$(PlatformTarget)\$(TargetName).pdb</ProgramDatabaseFile>
       <AdditionalLibraryDirectories>$(OutDir)..\..\lib\$(PlatformTarget)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LargeAddressAware>true</LargeAddressAware>
@@ -579,8 +615,8 @@ ENDLOCAL
       <PreserveSbr>true</PreserveSbr>
     </Bscmake>
     <PreBuildEvent>
-      <Command>
-ECHO ON
+      <Command>ECHO ON
+
 SETLOCAL EnableDelayedExpansion EnableExtensions
 
 IF EXIST "$(OutDir)..\..\licenses\$(ProjectName).txt" (
@@ -591,16 +627,19 @@ IF EXIST "$(OutDir)..\..\include\$(ProjectName)" (
   RD /q /s "$(OutDir)..\..\include\$(ProjectName)"
 )
 
-ENDLOCAL
-      </Command>
+ENDLOCAL</Command>
     </PreBuildEvent>
     <PostBuildEvent>
-      <Command>
-ECHO Off
+      <Command>ECHO Off
 SETLOCAL EnableDelayedExpansion EnableExtensions
 
-MKDIR "$(OutDir)..\..\include"
-MKDIR "$(OutDir)..\..\include\$(ProjectName)"
+IF NOT EXIST "$(OutDir)..\..\include" (
+  MKDIR "$(OutDir)..\..\include"
+)
+
+IF NOT EXIST "$(OutDir)..\..\include\$(ProjectName)" (
+  MKDIR "$(OutDir)..\..\include\$(ProjectName)"
+)
 
 COPY "$(ProjectDir)jconfig.h" "$(OutDir)..\..\include\$(ProjectName)"
 
@@ -609,11 +648,14 @@ FOR %%H IN (jmorecfg.h jpeglib.h) DO (
   COPY "$(ProjectDir)..\..\!_HEADER!" "$(OutDir)..\..\include\$(ProjectName)"
 )
 
-MKDIR "$(OutDir)..\..\licenses"
+IF NOT EXIST "$(OutDir)..\..\licenses" (
+  MKDIR "$(OutDir)..\..\licenses"
+)
+
 COPY "$(ProjectDir)..\..\README" "$(OutDir)..\..\licenses\$(ProjectName).txt" 
 
 ENDLOCAL
-      </Command>
+</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseDLL|x64'">
@@ -625,7 +667,7 @@ ENDLOCAL
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)..\..;$(OutDir)..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <ProgramDataBaseFileName>$(IntDir)$(TargetName).pdb</ProgramDataBaseFileName>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
       <PreprocessorDefinitions>JPEG_EXPORTS;NDEBUG;_WINDOWS;_USRDLL;WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BrowseInformationFile>$(IntDir)bsc\</BrowseInformationFile>
       <BrowseInformation>true</BrowseInformation>
@@ -636,7 +678,7 @@ ENDLOCAL
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
       <ImportLibrary>$(OutDir)..\..\lib\$(PlatformTarget)\$(TargetName).lib</ImportLibrary>
       <ProfileGuidedDatabase>$(IntDir)$(TargetName).pgd</ProfileGuidedDatabase>
-      <ProgramDatabaseFile>$(OutDir)..\..\lib\$(PlatformTarget)\$(TargetName).pdb</ProgramDatabaseFile>
+      <ProgramDatabaseFile>$(OutDir)..\..\bin\$(PlatformTarget)\$(TargetName).pdb</ProgramDatabaseFile>
       <AdditionalLibraryDirectories>$(OutDir)..\..\lib\$(PlatformTarget)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -646,8 +688,8 @@ ENDLOCAL
       <PreserveSbr>true</PreserveSbr>
     </Bscmake>
     <PreBuildEvent>
-      <Command>
-ECHO ON
+      <Command>ECHO ON
+
 SETLOCAL EnableDelayedExpansion EnableExtensions
 
 IF EXIST "$(OutDir)..\..\licenses\$(ProjectName).txt" (
@@ -658,16 +700,19 @@ IF EXIST "$(OutDir)..\..\include\$(ProjectName)" (
   RD /q /s "$(OutDir)..\..\include\$(ProjectName)"
 )
 
-ENDLOCAL
-      </Command>
+ENDLOCAL</Command>
     </PreBuildEvent>
     <PostBuildEvent>
-      <Command>
-ECHO Off
+      <Command>ECHO Off
 SETLOCAL EnableDelayedExpansion EnableExtensions
 
-MKDIR "$(OutDir)..\..\include"
-MKDIR "$(OutDir)..\..\include\$(ProjectName)"
+IF NOT EXIST "$(OutDir)..\..\include" (
+  MKDIR "$(OutDir)..\..\include"
+)
+
+IF NOT EXIST "$(OutDir)..\..\include\$(ProjectName)" (
+  MKDIR "$(OutDir)..\..\include\$(ProjectName)"
+)
 
 COPY "$(ProjectDir)jconfig.h" "$(OutDir)..\..\include\$(ProjectName)"
 
@@ -676,14 +721,17 @@ FOR %%H IN (jmorecfg.h jpeglib.h) DO (
   COPY "$(ProjectDir)..\..\!_HEADER!" "$(OutDir)..\..\include\$(ProjectName)"
 )
 
-MKDIR "$(OutDir)..\..\licenses"
+IF NOT EXIST "$(OutDir)..\..\licenses" (
+  MKDIR "$(OutDir)..\..\licenses"
+)
+
 COPY "$(ProjectDir)..\..\README" "$(OutDir)..\..\licenses\$(ProjectName).txt" 
 
 ENDLOCAL
-      </Command>
+</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
-    <ItemGroup>
+  <ItemGroup>
     <ClInclude Include="jconfig.h" />
     <ClInclude Include="..\..\jdct.h" />
     <ClInclude Include="..\..\jerror.h" />
