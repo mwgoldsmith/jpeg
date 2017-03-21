@@ -1,5 +1,7 @@
 /* jconfig.vc --- jconfig.h for Microsoft Visual C++ on Windows 95 or NT. */
 /* see jconfig.txt for explanations */
+#ifndef JCONFIG_H
+#define JCONFIG_H
 
 #define HAVE_PROTOTYPES
 #define HAVE_UNSIGNED_CHAR
@@ -49,3 +51,5 @@ typedef unsigned char boolean;
 #undef PROGRESS_REPORT		/* optional */
 
 #endif /* JPEG_CJPEG_DJPEG */
+
+#endif /* JCONFIG_H */
